@@ -34,8 +34,8 @@ export function GSCWheel() {
             const y = cy + Math.sin(angle) * radius;
             return (
               <g key={i}>
-                <circle cx={x} cy={y} r={22} fill="#fef3c7" stroke="#f59e0b" />
-                <text x={x} y={y + 4} textAnchor="middle" fontWeight="700" fontSize="12" fill="#92400e">{i + 1}</text>
+                <circle cx={x} cy={y} r={22} fill="#d9e7ff" stroke="#1d4eef" />
+                <text x={x} y={y + 4} textAnchor="middle" fontWeight="700" fontSize="12" fill="#1832a8">{i + 1}</text>
               </g>
             );
           })}

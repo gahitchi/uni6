@@ -31,7 +31,7 @@ export function LOCDiagram() {
               className={
                 "flex gap-3 px-2 -mx-2 rounded transition-colors " +
                 (l.kind === "comment"
-                  ? "text-emerald-300/80"
+                  ? "text-ink-400/90"
                   : l.kind === "blank"
                     ? "text-ink-500"
                     : "text-accent-100")

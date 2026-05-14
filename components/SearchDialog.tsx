@@ -64,7 +64,7 @@ export function SearchDialog({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-start justify-center bg-ink-950/30 px-4 pt-[10vh] animate-fade-in"
+      className="fixed inset-0 z-50 flex items-start justify-center bg-ink-950/50 px-4 pt-[10vh] animate-fade-in backdrop-blur-sm"
       onClick={onClose}
     >
       <div
@@ -125,7 +125,8 @@ export function SearchDialog({
           ))}
           {results.length === 0 && (
             <li className="px-4 py-8 text-center text-sm text-ink-500">
-              Nessun risultato per "{query}"
+              Nessun risultato per{" "}
+              <span className="font-semibold text-ink-700">&ldquo;{query}&rdquo;</span>
             </li>
           )}
         </ul>

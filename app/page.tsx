@@ -54,24 +54,22 @@ export default function HomePage() {
       <main className="mx-auto flex max-w-[1280px] items-center px-3 py-6 md:px-6 md:py-10">
         <div className="min-w-0 flex-1">
           {/* Cover slide */}
-          <section className="slide-canvas relative mx-auto w-full overflow-hidden rounded-3xl border border-ink-200 bg-white px-7 py-10 shadow-card md:px-14 md:py-14 lg:px-20 lg:py-16">
+          <section className="slide-canvas relative mx-auto w-full overflow-hidden rounded-3xl border border-ink-200 border-t-[3px] border-t-accent-600 bg-white px-7 py-10 md:px-14 md:py-14 lg:px-20 lg:py-16">
             <div
-              className="pointer-events-none absolute -top-32 -right-32 h-96 w-96 rounded-full bg-accent-200/40 blur-3xl"
-              aria-hidden
-            />
-            <div
-              className="pointer-events-none absolute -bottom-32 -left-32 h-96 w-96 rounded-full bg-violet-200/30 blur-3xl"
+              className="pointer-events-none absolute -top-32 -right-32 h-96 w-96 rounded-full bg-accent-100/30 blur-3xl"
               aria-hidden
             />
 
             <div className="relative grid gap-10 md:grid-cols-[1.4fr_1fr] md:gap-14">
               <div className="space-y-7">
-                <div className="inline-flex items-center gap-2 rounded-full border border-accent-200 bg-accent-50/60 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.22em] text-accent-800">
-                  <span className="h-1.5 w-1.5 rounded-full bg-accent-500" />
-                  Unità {unit.number} · Presentazione
+                <div className="flex flex-col">
+                  <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-accent-700">
+                    Unità {unit.number} · Presentazione
+                  </p>
+                  <span className="eyebrow-rule" aria-hidden />
                 </div>
 
-                <h1 className="text-4xl md:text-5xl lg:text-[64px] font-semibold leading-[1.02] tracking-[-0.03em] text-ink-900">
+                <h1 className="text-[44px] md:text-[64px] lg:text-[80px] font-semibold leading-[1.0] tracking-[-0.035em] text-ink-900">
                   <span className="gradient-text">Metriche</span> per la stima
                   <br className="hidden md:inline" />
                   dei costi nei progetti
@@ -103,23 +101,20 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <aside className="rounded-2xl border border-ink-200/70 bg-white/70 p-6 shadow-sm backdrop-blur">
-                <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-ink-500">
+              <aside className="rounded-2xl border border-ink-200/70 bg-white/70 p-5 backdrop-blur">
+                <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent-700">
                   Scheda della presentazione
                 </p>
-                <dl className="mt-4 divide-y divide-ink-100">
+                <dl className="mt-4 divide-y divide-ink-100/70">
                   <Row k="Lezioni" v={String(unit.lessons.length)} />
                   <Row k="Slide" v={String(totalSlides)} />
                   <Row k="Durata" v="≈ 45 minuti" />
                   <Row k="Lingua" v="Italiano" />
                 </dl>
-                <div className="mt-6 rounded-xl bg-ink-50/70 p-3 text-[12px] leading-relaxed text-ink-600">
-                  <p className="mb-1 text-[10px] font-bold uppercase tracking-[0.18em] text-ink-500">
-                    Suggerimento
-                  </p>
+                <p className="mt-5 text-[12px] leading-relaxed text-ink-500">
                   Premi <Kbd>N</Kbd> durante una slide per visualizzare le note
                   del relatore.
-                </div>
+                </p>
               </aside>
             </div>
           </section>
@@ -141,24 +136,21 @@ export default function HomePage() {
                 <Link
                   key={lesson.id}
                   href={`/lezione/${lesson.id}/${lesson.slides[0].id}`}
-                  className="group relative flex flex-col gap-4 overflow-hidden rounded-2xl border border-ink-200 bg-white p-6 transition-all hover:border-accent-300 hover:shadow-card"
+                  className="group relative flex flex-col gap-4 overflow-hidden rounded-2xl border border-ink-200 bg-white p-6 transition-all hover:border-accent-400 hover:shadow-card"
                 >
-                  <div
-                    className={`absolute inset-x-0 top-0 h-1 bg-gradient-to-r ${lesson.accent}`}
-                    aria-hidden
-                  />
-                  <div className="flex items-center justify-between">
-                    <div
-                      className={`grid h-11 w-11 place-items-center rounded-xl bg-gradient-to-br ${lesson.accent} text-white shadow-sm`}
-                    >
+                  <div className="flex items-start justify-between">
+                    <div className="grid h-11 w-11 place-items-center rounded-xl border border-ink-200 bg-ink-50 text-ink-700">
                       {lessonIcons[lesson.icon]}
                     </div>
-                    <span className="rounded-full bg-ink-50 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-ink-500">
-                      Parte {String(idx + 1).padStart(2, "0")}
+                    <span className="grid h-8 w-8 place-items-center rounded-full border border-accent-200 bg-accent-50 text-[12px] font-bold tabular-nums text-accent-700">
+                      {String(idx + 1).padStart(2, "0")}
                     </span>
                   </div>
                   <div className="space-y-1.5">
-                    <h3 className="text-[17px] font-semibold leading-snug tracking-[-0.005em] text-ink-900">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-accent-700">
+                      Parte {idx + 1}
+                    </p>
+                    <h3 className="text-[18px] font-semibold leading-snug tracking-[-0.012em] text-ink-900">
                       {lesson.title}
                     </h3>
                     <p className="text-[14px] leading-relaxed text-ink-600">
@@ -184,13 +176,13 @@ export default function HomePage() {
           {/* Concepts strip — dark band, like a section divider */}
           <section className="mt-10 md:mt-14">
             <div className="rounded-3xl border border-ink-800 bg-gradient-to-br from-ink-900 via-ink-950 to-ink-900 p-7 md:p-10 text-ink-50 shadow-lg">
-              <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-accent-300">
+              <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-accent-400">
                 Argomenti coperti
               </p>
               <h2 className="mt-2 text-[24px] md:text-[28px] font-semibold tracking-[-0.01em] text-white">
                 Concetti e modelli della presentazione
               </h2>
-              <div className="mt-6 grid gap-2 md:grid-cols-4">
+              <div className="mt-6 grid gap-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 {[
                   "LOC · SLOC · KLOC",
                   "Function Points · UFP",

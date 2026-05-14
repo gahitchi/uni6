@@ -53,9 +53,9 @@ export function SlideChrome({
 
   return (
     <>
-      {/* Top chrome — minimal: brand left, breadcrumb middle, controls right */}
+      {/* Top chrome — single-line breadcrumb, no repetition */}
       <header className="sticky top-0 z-30 border-b border-ink-100/70 glass">
-        <div className="mx-auto flex h-12 max-w-[1440px] items-center gap-3 px-4 md:px-6">
+        <div className="mx-auto flex h-12 max-w-[1440px] items-center gap-2.5 px-4 md:px-6">
           <Link
             href="/"
             className="group flex items-center gap-2"
@@ -64,13 +64,9 @@ export function SlideChrome({
             <span className="grid h-7 w-7 place-items-center rounded-md bg-gradient-to-br from-accent-600 to-accent-800 text-[11px] font-bold text-white shadow-sm">
               U6
             </span>
-            <span className="hidden md:inline text-[12px] font-semibold uppercase tracking-[0.2em] text-ink-600">
-              Unità 6
-            </span>
           </Link>
 
-          <span className="hidden md:inline text-ink-300">·</span>
-          <span className="hidden md:inline truncate text-[13px] text-ink-600">
+          <span className="hidden md:inline truncate text-[13px] font-medium text-ink-700">
             Lezione {lesson.number} — {lesson.title}
           </span>
 
@@ -94,9 +90,9 @@ export function SlideChrome({
             </kbd>
           </button>
         </div>
-        <div className="h-[3px] w-full bg-ink-100/80">
+        <div className="h-1 w-full bg-ink-100/80">
           <div
-            className="h-full bg-gradient-to-r from-accent-500 via-accent-600 to-accent-800 transition-[width] duration-500"
+            className="h-full bg-accent-600 transition-[width] duration-500"
             style={{ width: `${(position / total) * 100}%` }}
           />
         </div>
@@ -113,17 +109,31 @@ export function SlideChrome({
         <NavButton dir="next" target={next} />
       </main>
 
-      {/* Bottom chrome — counter + lesson dots + hints */}
+      {/* Bottom chrome — counter + lesson dots + hints (desktop) ·
+                          prev/counter/next (mobile) */}
       <footer className="sticky bottom-0 z-20 border-t border-ink-100/70 glass">
-        <div className="mx-auto flex h-12 max-w-[1280px] items-center gap-4 px-4 md:px-6">
+        <div className="mx-auto flex h-14 max-w-[1280px] items-center gap-3 px-3 md:h-12 md:px-6">
+          {/* Mobile: prev button */}
+          <MobileNavButton dir="prev" target={prev} />
+
           <div className="hidden md:flex items-center gap-3">
             <DotsRail position={position} total={total} />
           </div>
 
           <div className="flex-1" />
 
-          <div className="flex items-center gap-3 text-[12px] text-ink-500">
-            <span className="hidden md:inline">
+          {/* Mobile: centered counter */}
+          <div className="flex items-baseline gap-1 md:hidden">
+            <span className="tabular-nums text-[16px] font-semibold text-ink-900">
+              {String(position).padStart(2, "0")}
+            </span>
+            <span className="text-[11px] text-ink-400">/ {total}</span>
+          </div>
+
+          <div className="flex-1 md:hidden" />
+
+          <div className="hidden md:flex items-center gap-3 text-[12px] text-ink-500">
+            <span>
               <kbd className="rounded border border-ink-200 bg-white px-1.5 py-0.5 text-[10px] font-semibold text-ink-600">
                 ←
               </kbd>
@@ -132,20 +142,22 @@ export function SlideChrome({
               </kbd>
               <span className="ml-1.5">naviga</span>
             </span>
-            <span className="hidden md:inline">
+            <span>
               <kbd className="rounded border border-ink-200 bg-white px-1.5 py-0.5 text-[10px] font-semibold text-ink-600">
                 N
               </kbd>
               <span className="ml-1.5">note</span>
             </span>
-            <div className="flex items-center gap-1.5 rounded-md bg-ink-900 px-2.5 py-1 text-white">
-              <span className="tabular-nums text-[13px] font-semibold">
+            <div className="flex items-baseline gap-1">
+              <span className="tabular-nums text-[16px] font-semibold text-ink-900">
                 {String(position).padStart(2, "0")}
               </span>
-              <span className="text-ink-400">/</span>
-              <span className="tabular-nums text-[12px] text-ink-300">{total}</span>
+              <span className="text-[11px] text-ink-400">/ {total}</span>
             </div>
           </div>
+
+          {/* Mobile: next button */}
+          <MobileNavButton dir="next" target={next} />
         </div>
       </footer>
 
@@ -164,10 +176,10 @@ function NavButton({
   const disabled = !target;
   const Icon = dir === "prev" ? "←" : "→";
   const className = cn(
-    "group hidden md:flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full border bg-white text-2xl text-ink-500 shadow-card transition-all",
+    "group hidden md:flex h-20 w-10 flex-shrink-0 items-center justify-center rounded-2xl border bg-white/80 text-2xl font-medium text-ink-600 backdrop-blur transition-all",
     disabled
       ? "border-ink-100 opacity-30 cursor-not-allowed"
-      : "border-ink-200 hover:border-accent-300 hover:text-accent-700 hover:shadow-glow active:scale-95",
+      : "border-ink-200 hover:border-accent-400 hover:bg-white hover:text-accent-700 hover:shadow-card active:scale-95",
   );
 
   if (disabled) {
@@ -183,9 +195,50 @@ function NavButton({
       className={className}
       aria-label={`${dir === "prev" ? "Slide precedente" : "Slide successiva"} — ${target.slideTitle}`}
     >
-      <span className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-x-0">
+      <span
+        className={cn(
+          "transition-transform",
+          dir === "next"
+            ? "group-hover:translate-x-0.5"
+            : "group-hover:-translate-x-0.5",
+        )}
+      >
         {Icon}
       </span>
+    </Link>
+  );
+}
+
+function MobileNavButton({
+  dir,
+  target,
+}: {
+  dir: "prev" | "next";
+  target: SlideRef | null;
+}) {
+  const disabled = !target;
+  const Icon = dir === "prev" ? "←" : "→";
+  const className = cn(
+    "md:hidden flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl border text-xl font-medium transition-all",
+    disabled
+      ? "border-ink-100 bg-white/50 text-ink-300 cursor-not-allowed"
+      : "border-ink-200 bg-white text-ink-700 active:scale-95 active:bg-accent-50",
+  );
+
+  if (disabled) {
+    return (
+      <span className={className} aria-hidden>
+        {Icon}
+      </span>
+    );
+  }
+  return (
+    <Link
+      href={target.href}
+      className={className}
+      aria-label={dir === "prev" ? "Slide precedente" : "Slide successiva"}
+    >
+      {Icon}
     </Link>
   );
 }
@@ -207,7 +260,7 @@ function DotsRail({ position, total }: { position: number; total: number }) {
           className={cn(
             "h-1.5 rounded-full transition-all",
             d === position
-              ? "w-5 bg-accent-600"
+              ? "w-7 bg-accent-600 ring-1 ring-accent-200 ring-offset-1 ring-offset-white"
               : d < position
                 ? "w-1.5 bg-ink-400"
                 : "w-1.5 bg-ink-200",

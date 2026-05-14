@@ -20,15 +20,15 @@ export function ISO9126Tree() {
         {characteristics.map((c) => (
           <div
             key={c.name}
-            className="flex flex-col rounded-xl border border-emerald-200 bg-emerald-50/50 overflow-hidden"
+            className="flex flex-col rounded-xl border border-accent-200 bg-accent-50/40 overflow-hidden"
           >
-            <div className="bg-emerald-500 px-3 py-2 text-center">
+            <div className="bg-accent-600 px-3 py-2 text-center">
               <p className="text-sm font-bold text-white">{c.name}</p>
             </div>
             <ul className="flex-1 space-y-1 p-3 text-xs">
               {c.subs.map((s) => (
-                <li key={s} className="flex items-start gap-1.5 text-emerald-900/80">
-                  <span className="mt-1 h-1 w-1 rounded-full bg-emerald-500" />
+                <li key={s} className="flex items-start gap-1.5 text-accent-900/85">
+                  <span className="mt-1 h-1 w-1 rounded-full bg-accent-500" />
                   {s}
                 </li>
               ))}

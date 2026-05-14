@@ -10,10 +10,10 @@ const calloutStyles: Record<string, string> = {
 };
 
 const calloutIcon: Record<string, string> = {
-  info: "i",
-  warning: "!",
+  info: "ⓘ",
+  warning: "⚠",
   success: "✓",
-  neutral: "·",
+  neutral: "•",
 };
 
 function calloutBadge(tone: string) {
@@ -90,11 +90,11 @@ export function BlockRenderer({
     case "definition":
       return (
         <div className="rounded-2xl border border-ink-200 bg-white shadow-card overflow-hidden">
-          <div className="border-b border-ink-100 bg-gradient-to-b from-ink-50 to-white px-5 py-2.5">
-            <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-accent-700">
+          <div className="border-b border-ink-100 bg-gradient-to-b from-ink-50 to-white px-5 py-3">
+            <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent-700">
               Definizione
             </p>
-            <p className="text-lg font-semibold tracking-[-0.005em] text-ink-900">
+            <p className="text-[20px] font-semibold tracking-[-0.012em] text-ink-900">
               {block.term}
             </p>
           </div>
@@ -109,7 +109,7 @@ export function BlockRenderer({
           {block.items.map((item, i) => (
             <li
               key={i}
-              className="flex items-start gap-3.5 text-[17px] leading-[1.55] text-ink-800"
+              className="flex items-start gap-3.5 text-[16.5px] leading-[1.5] text-ink-800"
             >
               <span
                 className={cn(
@@ -151,7 +151,7 @@ export function BlockRenderer({
           {block.items.map((item, i) => (
             <li
               key={i}
-              className="flex items-start gap-3.5 text-[17px] leading-[1.55] text-ink-800"
+              className="flex items-start gap-3.5 text-[16.5px] leading-[1.5] text-ink-800"
             >
               <span className="grid h-7 w-7 flex-shrink-0 place-items-center rounded-full bg-gradient-to-br from-accent-600 to-accent-800 text-[12px] font-bold text-white shadow-sm">
                 {i + 1}
@@ -163,13 +163,13 @@ export function BlockRenderer({
       );
     case "formula":
       return (
-        <div className="rounded-2xl border border-accent-200 bg-gradient-to-br from-accent-50/60 via-white to-white p-6 md:p-7 shadow-card">
+        <div className="rounded-2xl border border-accent-200 bg-gradient-to-br from-accent-50/60 via-white to-white px-6 py-7 md:px-8 md:py-9 shadow-card">
           {block.label && (
-            <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.22em] text-accent-700">
+            <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.24em] text-accent-700">
               {block.label}
             </p>
           )}
-          <p className="formula text-2xl md:text-3xl text-ink-900">
+          <p className="formula text-2xl md:text-[32px] text-ink-900">
             {block.expression}
           </p>
           {block.where && (
@@ -265,8 +265,8 @@ export function BlockRenderer({
     case "takeaway":
       return (
         <div className="relative flex items-start gap-4 rounded-2xl border-l-[6px] border-accent-600 bg-gradient-to-r from-accent-50/70 via-accent-50/20 to-transparent px-5 py-4">
-          <span className="mt-1 text-2xl leading-none text-accent-600">★</span>
-          <p className="text-[17px] font-semibold leading-snug tracking-[-0.005em] text-ink-900">
+          <span className="mt-0.5 text-[22px] leading-none font-semibold text-accent-600">→</span>
+          <p className="text-[16.5px] font-semibold leading-snug tracking-[-0.005em] text-ink-900">
             {block.text}
           </p>
         </div>

@@ -6,6 +6,16 @@
   --font-inter: ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Iowan Old Style", "Apple Garamond", Baskerville, "Times New Roman", Georgia, serif;
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+
+  /* Single source of truth for diagram palette. Used by SVG components so they
+     all speak the same visual language. Mirrors the Tailwind tokens. */
+  --c-accent: #1d4eef;       /* accent-600 — primary diagram stroke/fill */
+  --c-accent-soft: #d9e7ff;  /* accent-100 — primary fills/backgrounds */
+  --c-accent-deep: #1a3084;  /* accent-900 — labels, deep emphasis */
+  --c-ink: #3a4256;          /* ink-700 — secondary stroke */
+  --c-ink-soft: #f6f7f9;     /* ink-50  — neutral background */
+  --c-ink-mid: #aeb5c6;      /* ink-300 — connectors, grid lines */
+  --c-warning: #f59e0b;      /* amber — danger/warning highlights only */
 }
 
 html {
@@ -24,7 +34,7 @@ body {
 .deck-bg {
   background:
     radial-gradient(60rem 40rem at 20% -10%, rgba(53,108,255,0.10), transparent 60%),
-    radial-gradient(60rem 40rem at 110% 10%, rgba(139,92,246,0.08), transparent 60%),
+    radial-gradient(60rem 40rem at 110% 10%, rgba(53,108,255,0.05), transparent 60%),
     linear-gradient(180deg, #eef1f8 0%, #f4f6fb 100%);
 }
 .deck-bg::before {
@@ -38,14 +48,22 @@ body {
   -webkit-mask-image: radial-gradient(60% 60% at 50% 35%, black, transparent 80%);
 }
 
-/* The slide surface — gives it that crisp "card on stage" look. */
+/* The slide surface — softer, single-source shadow for a calmer "card on stage". */
 .slide-canvas {
   background:
     linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(252,253,255,1) 100%);
   box-shadow:
-    0 1px 0 0 rgba(17,19,29,0.04),
-    0 24px 60px -20px rgba(17,19,29,0.18),
-    0 6px 20px -8px rgba(17,19,29,0.08);
+    0 1px 0 0 rgba(17,19,29,0.03),
+    0 18px 40px -16px rgba(17,19,29,0.12);
+}
+
+/* Editorial rule used under slide eyebrows — short, deliberate. */
+.eyebrow-rule {
+  display: inline-block;
+  width: 28px;
+  height: 2px;
+  background-color: var(--c-accent);
+  margin-top: 6px;
 }
 
 /* subtle grid background — kept for the homepage hero */

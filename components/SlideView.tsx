@@ -26,6 +26,7 @@ export function SlideView({ slide, lesson }: { slide: Slide; lesson: Lesson }) {
 
   const visibleBlocks = slide.blocks.filter((b) => b.kind !== "paragraph");
   const isOpener = slide.kind === "opener";
+  const isCloser = slide.kind === "closer";
 
   // Speaker notes: explicit notes[] take precedence; otherwise we surface any
   // paragraph blocks as fallback talking points.
@@ -40,42 +41,40 @@ export function SlideView({ slide, lesson }: { slide: Slide; lesson: Lesson }) {
   return (
     <article
       className={cn(
-        "slide-canvas relative mx-auto w-full overflow-hidden rounded-3xl border border-ink-200 bg-white shadow-card",
+        "slide-canvas relative mx-auto w-full overflow-hidden rounded-3xl border border-ink-200 bg-white",
         "px-7 py-10 md:px-14 md:py-14 lg:px-20 lg:py-16",
         "min-h-[min(78vh,720px)]",
         "animate-fade-in",
+        isOpener && "border-t-[3px] border-t-accent-600",
+        isCloser && "border-b-[3px] border-b-accent-600",
       )}
     >
-      {/* Subtle deco corners — give the canvas a more "slide" feel */}
+      {/* Single accent glow — calmer than dual radial */}
       <div
-        className="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full bg-accent-100/40 blur-3xl"
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-violet-100/30 blur-3xl"
+        className="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full bg-accent-100/25 blur-3xl"
         aria-hidden
       />
 
-      <header className="relative mb-8 md:mb-10">
-        <div className="flex items-center gap-2.5">
-          <span
-            className={cn(
-              "inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.22em]",
-              "border-accent-200 bg-accent-50/70 text-accent-800",
-            )}
-          >
-            <span className="grid h-4 w-4 place-items-center rounded-full bg-accent-600 text-[9px] font-bold text-white">
-              L{lesson.number}
-            </span>
-            {slide.eyebrow ?? lesson.title}
-          </span>
+      <header
+        className={cn(
+          "relative mb-9 md:mb-12",
+          isCloser && "text-center",
+        )}
+      >
+        <div className={cn("flex flex-col", isCloser && "items-center")}>
+          <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-accent-700">
+            Lezione {lesson.number} · {slide.eyebrow ?? lesson.title}
+          </p>
+          <span className="eyebrow-rule" aria-hidden />
         </div>
         <h1
           className={cn(
-            "mt-4 font-semibold leading-[1.08] tracking-[-0.025em] text-ink-900",
+            "mt-5 font-semibold text-ink-900",
             isOpener
-              ? "text-5xl md:text-6xl lg:text-7xl"
-              : "text-3xl md:text-4xl lg:text-[44px]",
+              ? "text-[44px] md:text-[64px] lg:text-[80px] leading-[1.0] tracking-[-0.035em]"
+              : isCloser
+                ? "text-[40px] md:text-[56px] lg:text-[72px] leading-[1.0] tracking-[-0.03em]"
+                : "text-[30px] md:text-[40px] lg:text-[48px] leading-[1.05] tracking-[-0.028em]",
           )}
         >
           {slide.title}

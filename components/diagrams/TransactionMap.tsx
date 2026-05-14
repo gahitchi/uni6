@@ -14,12 +14,12 @@ export function TransactionMap() {
 
         {/* Transaction boxes */}
         <g transform="translate(0,120)">
-          <rect x="120" y="0" width="120" height="60" rx="10" fill="#fef3c7" stroke="#f59e0b" strokeWidth="1.5" />
-          <text x="180" y="35" textAnchor="middle" fontWeight="700" fontSize="14" fill="#92400e">EI</text>
-          <rect x="300" y="0" width="120" height="60" rx="10" fill="#fef3c7" stroke="#f59e0b" strokeWidth="1.5" />
-          <text x="360" y="35" textAnchor="middle" fontWeight="700" fontSize="14" fill="#92400e">EO</text>
-          <rect x="480" y="0" width="120" height="60" rx="10" fill="#fef3c7" stroke="#f59e0b" strokeWidth="1.5" />
-          <text x="540" y="35" textAnchor="middle" fontWeight="700" fontSize="14" fill="#92400e">EQ</text>
+          <rect x="120" y="0" width="120" height="60" rx="10" fill="#d9e7ff" stroke="#1d4eef" strokeWidth="1.5" />
+          <text x="180" y="35" textAnchor="middle" fontWeight="700" fontSize="14" fill="#1832a8">EI</text>
+          <rect x="300" y="0" width="120" height="60" rx="10" fill="#d9e7ff" stroke="#1d4eef" strokeWidth="1.5" />
+          <text x="360" y="35" textAnchor="middle" fontWeight="700" fontSize="14" fill="#1832a8">EO</text>
+          <rect x="480" y="0" width="120" height="60" rx="10" fill="#d9e7ff" stroke="#1d4eef" strokeWidth="1.5" />
+          <text x="540" y="35" textAnchor="middle" fontWeight="700" fontSize="14" fill="#1832a8">EQ</text>
         </g>
 
         {/* Connector to user */}
@@ -38,8 +38,8 @@ export function TransactionMap() {
         <text x="180" y="280" textAnchor="middle" fontWeight="700" fontSize="14" fill="#163cd6">ILF</text>
 
         {/* EIF outside boundary */}
-        <rect x="500" y="245" width="160" height="60" rx="10" fill="#fce7f3" stroke="#be185d" strokeWidth="1.5" />
-        <text x="580" y="280" textAnchor="middle" fontWeight="700" fontSize="14" fill="#831843" >EIF</text>
+        <rect x="500" y="245" width="160" height="60" rx="10" fill="#f6f7f9" stroke="#7e88a1" strokeWidth="1.5" />
+        <text x="580" y="280" textAnchor="middle" fontWeight="700" fontSize="14" fill="#3a4256" >EIF</text>
         <text x="580" y="345" textAnchor="middle" fontSize="11" fill="#5b6781">Altre attività e/o applicazioni</text>
 
         {/* lines transaction->ilf/eif */}

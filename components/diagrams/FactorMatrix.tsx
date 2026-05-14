@@ -59,11 +59,11 @@ export function FactorMatrix() {
                       {r === c ? (
                         <span className="block h-7 w-7 mx-auto rounded-md bg-ink-100" />
                       ) : cell === "S" ? (
-                        <span className="block h-7 w-7 mx-auto rounded-md bg-emerald-100 text-emerald-700 font-semibold leading-7">
+                        <span className="block h-7 w-7 mx-auto rounded-md bg-accent-100 text-accent-800 font-semibold leading-7">
                           S
                         </span>
                       ) : cell === "C" ? (
-                        <span className="block h-7 w-7 mx-auto rounded-md bg-rose-100 text-rose-700 font-semibold leading-7">
+                        <span className="block h-7 w-7 mx-auto rounded-md bg-amber-100 text-amber-800 font-semibold leading-7">
                           C
                         </span>
                       ) : (
@@ -79,11 +79,11 @@ export function FactorMatrix() {
       </div>
       <div className="mt-4 flex flex-wrap gap-3 text-xs text-ink-600">
         <span className="inline-flex items-center gap-2">
-          <span className="h-3 w-3 rounded bg-emerald-100" />
+          <span className="h-3 w-3 rounded bg-accent-100" />
           S — sinergia
         </span>
         <span className="inline-flex items-center gap-2">
-          <span className="h-3 w-3 rounded bg-rose-100" />
+          <span className="h-3 w-3 rounded bg-amber-100" />
           C — conflitto
         </span>
       </div>

@@ -8,8 +8,8 @@ export function UFPBreakdown() {
             <stop offset="100%" stopColor="#1d4eef" />
           </linearGradient>
           <linearGradient id="branchGrad" x1="0" x2="1" y1="0" y2="0">
-            <stop offset="0%" stopColor="#f59e0b" />
-            <stop offset="100%" stopColor="#ea580c" />
+            <stop offset="0%" stopColor="#356cff" />
+            <stop offset="100%" stopColor="#163cd6" />
           </linearGradient>
         </defs>
         {/* root */}
@@ -43,12 +43,12 @@ export function UFPBreakdown() {
           <line x1="460" y1="230" x2="510" y2="180" stroke="#aeb5c6" strokeWidth="1" />
           <line x1="460" y1="230" x2="510" y2="230" stroke="#aeb5c6" strokeWidth="1" />
           <line x1="460" y1="230" x2="510" y2="280" stroke="#aeb5c6" strokeWidth="1" />
-          <rect x="510" y="162" width="180" height="36" rx="8" fill="#fef3c7" stroke="#fbbf24" />
-          <text x="600" y="185" textAnchor="middle" fill="#92400e" fontWeight="600" fontSize="11">EXTERNAL INPUTS — EI</text>
-          <rect x="510" y="212" width="180" height="36" rx="8" fill="#fef3c7" stroke="#fbbf24" />
-          <text x="600" y="235" textAnchor="middle" fill="#92400e" fontWeight="600" fontSize="11">EXTERNAL OUTPUTS — EO</text>
-          <rect x="510" y="262" width="180" height="36" rx="8" fill="#fef3c7" stroke="#fbbf24" />
-          <text x="600" y="285" textAnchor="middle" fill="#92400e" fontWeight="600" fontSize="11">EXTERNAL INQUIRIES — EQ</text>
+          <rect x="510" y="162" width="180" height="36" rx="8" fill="#eef5ff" stroke="#8db8ff" />
+          <text x="600" y="185" textAnchor="middle" fill="#1832a8" fontWeight="600" fontSize="11">EXTERNAL INPUTS — EI</text>
+          <rect x="510" y="212" width="180" height="36" rx="8" fill="#eef5ff" stroke="#8db8ff" />
+          <text x="600" y="235" textAnchor="middle" fill="#1832a8" fontWeight="600" fontSize="11">EXTERNAL OUTPUTS — EO</text>
+          <rect x="510" y="262" width="180" height="36" rx="8" fill="#eef5ff" stroke="#8db8ff" />
+          <text x="600" y="285" textAnchor="middle" fill="#1832a8" fontWeight="600" fontSize="11">EXTERNAL INQUIRIES — EQ</text>
         </g>
       </svg>
     </div>

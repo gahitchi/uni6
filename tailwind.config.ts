@@ -46,6 +46,7 @@ const config: Config = {
       },
       boxShadow: {
         card: "0 1px 0 0 rgba(17,19,29,0.04), 0 8px 24px -8px rgba(17,19,29,0.08)",
+        slide: "0 1px 0 0 rgba(17,19,29,0.03), 0 18px 40px -16px rgba(17,19,29,0.12)",
         glow: "0 0 0 1px rgba(53,108,255,0.15), 0 12px 32px -12px rgba(53,108,255,0.25)",
       },
       animation: {

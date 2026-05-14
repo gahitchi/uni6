@@ -42,7 +42,7 @@ export function RayleighNorden() {
           return (
             <>
               <line x1={xTd} y1={padY} x2={xTd} y2={h - padY} stroke="#f59e0b" strokeDasharray="4 4" />
-              <text x={xTd} y={padY - 6} textAnchor="middle" fontSize="12" fill="#ea580c" fontWeight="600">
+              <text x={xTd} y={padY - 6} textAnchor="middle" fontSize="12" fill="#92400e" fontWeight="600">
                 t_d (picco)
               </text>
             </>
