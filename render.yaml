@@ -13,11 +13,14 @@ services:
     plan: free
     region: frankfurt
     autoDeploy: true
-    buildCommand: npm install && npm run build
+    # --include=dev is required: Next's build pipeline depends on devDependencies
+    # (tailwindcss, postcss, autoprefixer, typescript) at compile time.
+    buildCommand: npm ci --include=dev && npm run build
     startCommand: npm run start
     healthCheckPath: /
     envVars:
       - key: NODE_VERSION
         value: 20.18.0
-      - key: NODE_ENV
-        value: production
+      # NODE_ENV is intentionally NOT set here. Render sets it to "production"
+      # for runtime automatically; setting it during build would cause npm to
+      # skip devDependencies and break the Next.js webpack build.
