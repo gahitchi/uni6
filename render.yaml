@@ -1,0 +1,23 @@
+# Render Blueprint — deploys this presentation as a Node web service.
+# Reference: https://render.com/docs/blueprint-spec
+#
+# To deploy:
+#   1. Push this repo to GitHub.
+#   2. In Render, "New" → "Blueprint" → connect the repo.
+#   3. Render reads this file and provisions the service automatically.
+
+services:
+  - type: web
+    name: uni6-presentation
+    runtime: node
+    plan: free
+    region: frankfurt
+    autoDeploy: true
+    buildCommand: npm install && npm run build
+    startCommand: npm run start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_VERSION
+        value: 20.18.0
+      - key: NODE_ENV
+        value: production
