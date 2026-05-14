@@ -15,7 +15,13 @@ export type BlockKind =
   | "diagram"
   | "quote"
   | "checklist"
-  | "twoColumn";
+  | "twoColumn"
+  /* Visual-teaching primitives (added for the pedagogical upgrade) */
+  | "journey"
+  | "compare"
+  | "keypoint"
+  | "prompt"
+  | "stat";
 
 export interface ParagraphBlock {
   kind: "paragraph";
@@ -103,6 +109,65 @@ export interface TwoColumnBlock {
   right: { title: string; items: string[] };
 }
 
+/**
+ * Visual pipeline of numbered stages — turns linear ordered lists into a
+ * "process" the audience can see. Use for: IFPUG 7 phases, ML pipeline,
+ * backfiring flow, COCOMO levels.
+ */
+export interface JourneyBlock {
+  kind: "journey";
+  /** Optional intro line above the pipeline */
+  intro?: string;
+  steps: { label: string; description?: string }[];
+}
+
+/**
+ * Side-by-side comparison. Teaches differences visually instead of in prose.
+ * Use for: LOC vs FP, COCOMO vs SLIM, product vs process metrics, ecc.
+ */
+export interface CompareBlock {
+  kind: "compare";
+  a: { label: string; sub?: string; points: string[] };
+  b: { label: string; sub?: string; points: string[] };
+  /** Optional verdict line shown below both columns */
+  verdict?: string;
+}
+
+/**
+ * Full-bleed "moment" block — one short, emphasized statement, large type.
+ * Use sparingly: 1 per slide max. For high-impact takeaway or section pivots.
+ */
+export interface KeypointBlock {
+  kind: "keypoint";
+  text: string;
+  /** Optional small caption shown above the keypoint */
+  eyebrow?: string;
+}
+
+/**
+ * Audience interaction prompt — a question for the lecturer to ask aloud.
+ * Visually distinct so the speaker remembers to pause.
+ */
+export interface PromptBlock {
+  kind: "prompt";
+  question: string;
+  /** Optional micro-hints visible to the speaker only via notes */
+  hint?: string;
+}
+
+/**
+ * Big-number stat — anchor a quantitative claim visually.
+ * Use for: "85% delle org IT italiane è al livello 1 CMM" type insights.
+ */
+export interface StatBlock {
+  kind: "stat";
+  value: string;
+  unit?: string;
+  label: string;
+  /** Optional source/context, displayed small */
+  context?: string;
+}
+
 export type Block =
   | ParagraphBlock
   | LeadBlock
@@ -117,14 +182,26 @@ export type Block =
   | DiagramBlock
   | QuoteBlock
   | ChecklistBlock
-  | TwoColumnBlock;
+  | TwoColumnBlock
+  | JourneyBlock
+  | CompareBlock
+  | KeypointBlock
+  | PromptBlock
+  | StatBlock;
 
 export interface Slide {
   id: string;
   title: string;
   eyebrow?: string;
-  /** Optional kicker for visually distinct slide types. */
-  kind?: "opener" | "section" | "closer";
+  /**
+   * Visual treatment hint:
+   * - `opener`     — lesson opening, big title, top accent border
+   * - `closer`     — lesson/deck close, centered, bottom accent border
+   * - `transition` — section break between major topics, minimalist anchor
+   * - `anchor`     — visual-first slide, large diagram or stat as focal point
+   * - `keypoint`   — single-statement moment slide, minimal text
+   */
+  kind?: "opener" | "section" | "closer" | "transition" | "anchor" | "keypoint";
   /** Optional speaker talking points (shown in notes panel, hidden on slide). */
   notes?: string[];
   blocks: Block[];

@@ -177,47 +177,31 @@ export const lesson2: Lesson = {
     {
       id: "schema-boehm",
       eyebrow: "Schema di classificazione",
-      title: "La classificazione di Barry Boehm",
+      title: "Quale metodo scegliere?",
       blocks: [
         {
-          kind: "paragraph",
+          kind: "lead",
           text:
-            "Data la grande quantità di metodi di stima, è utile la classificazione creata da Boehm:",
+            "Boehm offre una tassonomia teorica — ma la domanda pratica è: dato il mio progetto, quale metodo applico?",
+        },
+        {
+          kind: "diagram",
+          name: "EstimationDecisionTree",
+          caption: "Albero decisionale dei metodi di stima dei costi.",
         },
         {
           kind: "diagram",
           name: "BoehmTaxonomy",
-          caption:
-            "Tassonomia dei metodi di stima dei costi software secondo Boehm.",
+          caption: "Tassonomia originale di Boehm (vista categoriale).",
         },
-        {
-          kind: "twoColumn",
-          left: {
-            title: "Metodi basati su modelli — Generici",
-            items: [
-              "Metodi proprietari (dettagli non pubblici)",
-              "Metodi non proprietari (es. COCOMO)",
-            ],
-          },
-          right: {
-            title: "Metodi basati su modelli — Specifici",
-            items: [
-              "Metodi data driven (statistici o machine learning)",
-              "Metodi composti (esperti + data-driven)",
-            ],
-          },
-        },
-        {
-          kind: "definition",
-          term: "Machine Learning",
-          text:
-            "Algoritmi che forniscono al computer capacità di apprendimento, cercando di dedurre una definizione in base ad esempi.",
-        },
-        {
-          kind: "paragraph",
-          text:
-            "I metodi non basati su modelli si fondano sull'esperienza diretta di un esperto. Generalmente si usano tecniche top-down (scomposizione per componenti) o bottom-up (analisi per attività), aggiungendo lo sforzo di integrazione.",
-        },
+      ],
+      notes: [
+        "L'albero decisionale è una semplificazione operativa — il libro presenta la tassonomia Boehm originale.",
+        "Metodi basati su modelli: proprietari (SLIM) vs non proprietari (COCOMO).",
+        "Metodi data-driven: statistici o machine learning (alberi di classificazione, CART, OSR).",
+        "Metodi composti: ibridi esperti + dati (COBRA).",
+        "Metodi non basati su modelli: Delphi (consenso esperti), Parkinson e Price-to-win (rischiosi).",
+        "Machine Learning: algoritmi che imparano da esempi.",
       ],
     },
     {
@@ -284,43 +268,47 @@ export const lesson2: Lesson = {
       title: "COCOMO — Constructive Cost Model",
       blocks: [
         {
-          kind: "paragraph",
+          kind: "lead",
           text:
-            "COCOMO è uno dei più consolidati modelli per la stima dei costi del software, sviluppato da Barry Boehm all'inizio degli anni Ottanta. Si applica solo se sono rispettate alcune ipotesi:",
+            "Boehm, primi anni Ottanta. Stesso software, modi diversi: lo sforzo dipende fortemente dal tipo di applicazione.",
         },
         {
-          kind: "list",
-          variant: "check",
-          items: [
-            "Ciclo di sviluppo a cascata in 4 fasi: pianificazione/analisi requisiti, progetto, sviluppo, integrazione/test",
-            "Requisiti abbastanza stabili",
-            "Mese-persona di 19 giorni (8 ore al giorno, 152 ore di lavoro)",
-          ],
-        },
-        {
-          kind: "paragraph",
-          text:
-            "Il modello si basa sulla quantità di software da sviluppare (LOC, FP), permette di raffinare la stima tenendo conto di altri fattori e consente anche una stima preventiva a range. Distingue tre tipi di applicazioni:",
+          kind: "diagram",
+          name: "COCOMOEffortCurve",
+          caption: "Sforzo (mesi-persona) in funzione della dimensione (KLOC), per i tre modi.",
         },
         {
           kind: "twoColumn",
           left: {
             title: "Per tipo di applicazione",
             items: [
-              "Semplici (Organic Mode) — applicazioni relativamente semplici di dimensioni limitate",
-              "Intermedie (Semi-detached Mode) — complessità e dimensioni medie",
-              "Complesse (Embedded Mode) — controllo stringente, sistemi in tempo reale",
+              "Organic — semplice, dimensioni limitate",
+              "Semi-detached — complessità media",
+              "Embedded — vincoli stringenti, real-time",
             ],
           },
           right: {
             title: "Per livello di raffinamento",
             items: [
-              "Modello base",
-              "Modello intermedio",
-              "Modello avanzato (COCOMO II)",
+              "Modello base — formula a una variabile",
+              "Modello intermedio — 15 cost driver",
+              "COCOMO II — 17 EM + 5 scale factor",
             ],
           },
         },
+        {
+          kind: "callout",
+          tone: "warning",
+          title: "Ipotesi di applicabilità",
+          text:
+            "Ciclo a cascata in 4 fasi, requisiti stabili, mese-persona di 19 giorni (152 h).",
+        },
+      ],
+      notes: [
+        "COCOMO è uno dei più consolidati modelli per la stima dei costi del software.",
+        "Si applica solo se sono rispettate alcune ipotesi: ciclo a cascata, requisiti stabili.",
+        "Mese-persona convenzionale: 19 giorni × 8 ore = 152 ore di lavoro.",
+        "Si basa su LOC o FP; permette anche una stima preventiva a range.",
       ],
     },
     {
@@ -509,34 +497,30 @@ export const lesson2: Lesson = {
     {
       id: "cmm",
       eyebrow: "CMM",
-      title: "Capability Maturity Model",
+      title: "Capability Maturity Model — cinque livelli di processo",
       blocks: [
         {
           kind: "definition",
           term: "CMM",
           text:
-            "Capability Maturity Model, sviluppato dal SEI (Software Engineering Institute) per assistere il DOD nel valutare la qualità dei fornitori di software. Misura capability (adeguatezza del processo) e maturity (consolidamento).",
+            "Capability Maturity Model — SEI (Software Engineering Institute). Misura capability (adeguatezza) e maturity (consolidamento) del processo.",
         },
         {
-          kind: "paragraph",
-          text:
-            "I risultati delle attività di valutazione sono sintetizzati in un voto numerico tra 1 e 5, ciascuno associato a un giudizio:",
-        },
-        {
-          kind: "ordered",
-          items: [
-            "Iniziale — caratterizzati da assenza di regole; il successo dipende dall'iniziativa individuale",
-            "Ripetibile — processi principali ben definiti, costi/tempi/funzioni controllabili",
-            "Definito — processo organizzativo documentato e standardizzato",
-            "Gestito — misure dettagliate per ogni processo; processi e prodotti studiati e controllati",
-            "Ottimizzato — miglioramento continuo basato su misurazioni e innovazione",
+          kind: "journey",
+          steps: [
+            { label: "Iniziale", description: "Assenza di regole. Il successo dipende dall'individuo." },
+            { label: "Ripetibile", description: "Processi principali definiti. Costi e tempi controllabili." },
+            { label: "Definito", description: "Processo organizzativo documentato e standardizzato." },
+            { label: "Gestito", description: "Misure dettagliate per ogni processo." },
+            { label: "Ottimizzato", description: "Miglioramento continuo basato su dati e innovazione." },
           ],
         },
         {
-          kind: "callout",
-          tone: "info",
-          text:
-            "L'85% delle organizzazioni informatiche italiane è al livello 1 o sotto, meno dell'1% raggiunge il livello 4.",
+          kind: "stat",
+          value: "85",
+          unit: "%",
+          label: "delle organizzazioni IT italiane è al livello 1 o sotto",
+          context: "Meno dell'1 % raggiunge il livello 4. Fonte: rilevazione storica nel testo.",
         },
       ],
     },
@@ -846,6 +830,25 @@ export const lesson2: Lesson = {
           text:
             "Si ringrazia il prof. Sandro Morasca — Università degli Studi dell'Insubria di Como — per la collaborazione nella stesura di questa Lezione.",
         },
+      ],
+    },
+    {
+      id: "transizione",
+      eyebrow: "Verso la Lezione 3",
+      title: "Sappiamo stimare. Ma stiamo costruendo qualcosa di buono?",
+      kind: "transition",
+      blocks: [
+        {
+          kind: "keypoint",
+          eyebrow: "Ponte concettuale",
+          text:
+            "Misurare lo sforzo non basta — serve un modello per misurare la qualità del software prodotto.",
+        },
+      ],
+      notes: [
+        "Sintesi rapida: COCOMO, SLIM, COBRA, Delphi.",
+        "Limite comune: tutti questi metodi stimano i costi, non la qualità del risultato.",
+        "Annuncia la lezione 3: McCall-Boehm, ISO/IEC 9126, qualità in uso.",
       ],
     },
   ],

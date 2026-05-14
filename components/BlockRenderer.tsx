@@ -338,7 +338,206 @@ export function BlockRenderer({
           ))}
         </div>
       );
+    case "journey":
+      return (
+        <div className="space-y-5">
+          {block.intro && (
+            <p className="text-[15.5px] leading-relaxed text-ink-700">
+              {block.intro}
+            </p>
+          )}
+          <ol className="grid gap-3 md:gap-4">
+            {block.steps.map((step, i) => {
+              const isLast = i === block.steps.length - 1;
+              return (
+                <li
+                  key={i}
+                  className="relative flex gap-4 rounded-2xl border border-ink-200 bg-white px-5 py-4 shadow-card"
+                >
+                  <div className="flex flex-col items-center">
+                    <span className="grid h-9 w-9 flex-shrink-0 place-items-center rounded-full bg-gradient-to-br from-accent-600 to-accent-800 text-[13px] font-bold text-white shadow-sm">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    {!isLast && (
+                      <span className="mt-2 h-full w-px bg-gradient-to-b from-accent-300 to-transparent" />
+                    )}
+                  </div>
+                  <div className="flex-1 pb-1">
+                    <p className="text-[16px] font-semibold leading-snug tracking-[-0.005em] text-ink-900">
+                      {step.label}
+                    </p>
+                    {step.description && (
+                      <p className="mt-1 text-[14px] leading-[1.55] text-ink-600">
+                        {step.description}
+                      </p>
+                    )}
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
+        </div>
+      );
+    case "compare":
+      return (
+        <div className="space-y-3">
+          <div className="grid gap-3 md:grid-cols-[1fr_auto_1fr]">
+            <CompareCol
+              label={block.a.label}
+              sub={block.a.sub}
+              points={block.a.points}
+              tone="accent"
+            />
+            <div className="hidden md:flex items-center justify-center">
+              <span className="grid h-9 w-9 place-items-center rounded-full border border-ink-200 bg-white text-[11px] font-bold uppercase tracking-[0.1em] text-ink-500 shadow-card">
+                vs
+              </span>
+            </div>
+            <CompareCol
+              label={block.b.label}
+              sub={block.b.sub}
+              points={block.b.points}
+              tone="ink"
+            />
+          </div>
+          {block.verdict && (
+            <div className="rounded-xl border border-accent-200 bg-accent-50/40 px-4 py-3 text-[14.5px] leading-relaxed text-ink-800">
+              <span className="font-bold text-accent-700">→ </span>
+              {block.verdict}
+            </div>
+          )}
+        </div>
+      );
+    case "keypoint":
+      return (
+        <div className="relative overflow-hidden rounded-3xl border border-ink-800 bg-gradient-to-br from-ink-900 via-ink-950 to-ink-900 px-7 py-10 md:px-12 md:py-14 text-white shadow-lg">
+          <div className="absolute inset-0 bg-data-grid opacity-25" aria-hidden />
+          <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-accent-600/20 blur-3xl" aria-hidden />
+          <div className="relative">
+            {block.eyebrow && (
+              <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-accent-300">
+                {block.eyebrow}
+              </p>
+            )}
+            <p
+              className={cn(
+                "text-balance text-[28px] md:text-[36px] lg:text-[44px] font-semibold leading-[1.15] tracking-[-0.018em]",
+                block.eyebrow ? "mt-3" : "",
+              )}
+            >
+              {block.text}
+            </p>
+          </div>
+        </div>
+      );
+    case "prompt":
+      return (
+        <div className="rounded-2xl border border-amber-200 bg-gradient-to-br from-amber-50/70 to-white px-5 py-4 md:px-6 md:py-5">
+          <div className="flex items-start gap-3.5">
+            <span className="grid h-8 w-8 flex-shrink-0 place-items-center rounded-full bg-amber-500 text-base font-bold text-white">
+              ?
+            </span>
+            <div className="flex-1">
+              <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-amber-700">
+                Domanda al pubblico
+              </p>
+              <p className="mt-1 text-[17px] font-semibold leading-snug tracking-[-0.005em] text-ink-900">
+                {block.question}
+              </p>
+              {block.hint && (
+                <p className="mt-2 text-[13px] italic text-ink-500">
+                  {block.hint}
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
+      );
+    case "stat":
+      return (
+        <div className="relative overflow-hidden rounded-2xl border border-ink-200 bg-white px-6 py-7 shadow-card md:px-8 md:py-8">
+          <div className="absolute inset-0 bg-data-grid opacity-40" aria-hidden />
+          <div className="relative flex items-baseline gap-2">
+            <span className="text-[64px] md:text-[88px] font-semibold leading-[0.95] tracking-[-0.04em] gradient-text tabular-nums">
+              {block.value}
+            </span>
+            {block.unit && (
+              <span className="text-[24px] md:text-[32px] font-medium text-accent-700 tabular-nums">
+                {block.unit}
+              </span>
+            )}
+          </div>
+          <p className="relative mt-2 text-[16px] font-semibold leading-snug text-ink-900">
+            {block.label}
+          </p>
+          {block.context && (
+            <p className="relative mt-1 text-[12px] text-ink-500">
+              {block.context}
+            </p>
+          )}
+        </div>
+      );
     default:
       return null;
   }
+}
+
+function CompareCol({
+  label,
+  sub,
+  points,
+  tone,
+}: {
+  label: string;
+  sub?: string;
+  points: string[];
+  tone: "accent" | "ink";
+}) {
+  const styles =
+    tone === "accent"
+      ? {
+          box: "border-accent-200 bg-gradient-to-br from-accent-50/60 to-white",
+          eyebrow: "text-accent-700",
+          bullet: "bg-accent-600",
+        }
+      : {
+          box: "border-ink-200 bg-gradient-to-br from-ink-50/60 to-white",
+          eyebrow: "text-ink-600",
+          bullet: "bg-ink-500",
+        };
+  return (
+    <div
+      className={cn(
+        "flex flex-col gap-3 rounded-2xl border p-5 shadow-card",
+        styles.box,
+      )}
+    >
+      <div>
+        <p
+          className={cn(
+            "text-[10px] font-bold uppercase tracking-[0.22em]",
+            styles.eyebrow,
+          )}
+        >
+          {label}
+        </p>
+        {sub && (
+          <p className="mt-0.5 text-[13px] text-ink-500">{sub}</p>
+        )}
+      </div>
+      <ul className="space-y-2.5 text-[15px] leading-[1.55] text-ink-700">
+        {points.map((p, i) => (
+          <li key={i} className="flex items-start gap-2.5">
+            <span
+              className={cn(
+                "mt-2 inline-block h-1.5 w-1.5 flex-shrink-0 rounded-full",
+                styles.bullet,
+              )}
+            />
+            {p}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }

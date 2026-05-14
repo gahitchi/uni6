@@ -536,52 +536,41 @@ export const lesson3: Lesson = {
       title: "Le tre categorie di problemi del codice",
       blocks: [
         {
-          kind: "lead",
-          text:
-            "Una sottocaratteristica fondamentale di qualità è la presenza o meno di errori: l'utente li usa come indicatore della bontà del prodotto, e possono portare al fallimento dell'intero progetto.",
-        },
-        {
-          kind: "paragraph",
-          text:
-            "La soluzione ottimale è ridurre al minimo gli errori in fase di sviluppo per produrre codice di qualità. Analizziamo le tre categorie di cause:",
-        },
-        {
-          kind: "twoColumn",
-          left: {
-            title: "Definizioni",
-            items: [
-              "Errore (error) — commesso da un essere umano (codice, documentazione, dati, procedure)",
-              "Difetto (fault o defect) — caratteristica fisica di una porzione di codice, documentazione, dati o procedure",
-              "Malfunzionamento (failure) — conseguenza di un difetto che si manifesta durante l'utilizzo",
+          kind: "compare",
+          a: {
+            label: "Errore → Difetto",
+            sub: "causa umana → traccia nel codice",
+            points: [
+              "Error: commesso da una persona",
+              "Documentazione, codice, dati, procedure",
+              "Fault / Defect: porzione di codice difettosa",
+              "Caratteristica fisica osservabile",
             ],
           },
-          right: {
-            title: "Note importanti",
-            items: [
-              "Il problema non si verifica subito",
-              "Il fallimento può manifestarsi anche dopo anni (es. millennium bug)",
-              "Gli errori sono presenti in ogni fase del ciclo",
+          b: {
+            label: "Failure",
+            sub: "manifestazione in esercizio",
+            points: [
+              "Conseguenza del difetto in run-time",
+              "Può non verificarsi subito",
+              "Anche dopo anni (es. millennium bug)",
+              "Visibile all'utente",
             ],
           },
+          verdict:
+            "Un errore (umano) genera un difetto (nel codice) che, in certe condizioni d'uso, produce un malfunzionamento (failure).",
         },
         {
-          kind: "table",
-          caption: "Distribuzione degli errori per fase (campione 100 progetti)",
-          headers: ["Fase", "Percentuale"],
-          rows: [
-            ["Requisiti", "3%"],
-            ["Analisi e progettazione", "7%"],
-            ["Codifica e test unitario", "53%"],
-            ["Test di integrazione", "21%"],
-            ["Test di sistema", "11%"],
-            ["Esercizio", "5%"],
-          ],
+          kind: "diagram",
+          name: "ErrorPhaseTimeline",
         },
-        {
-          kind: "takeaway",
-          text:
-            "Il grosso degli errori emerge durante codifica e test, ma continua a manifestarsi anche dopo la messa in servizio, almeno nei primi 18 mesi di attività.",
-        },
+      ],
+      notes: [
+        "Un errore (error) è commesso da un essere umano: in codice, documentazione, dati o procedure.",
+        "Un difetto (fault/defect) è una caratteristica fisica del codice o della documentazione.",
+        "Un malfunzionamento (failure) è la conseguenza che si manifesta in esercizio.",
+        "Il fallimento può manifestarsi anche dopo anni: il classico esempio è il millennium bug.",
+        "La soluzione ottimale è ridurre gli errori in fase di sviluppo per produrre codice di qualità.",
       ],
     },
     {
@@ -655,6 +644,12 @@ export const lesson3: Lesson = {
       title: "Tre elementi per migliorare la qualità",
       kind: "closer",
       blocks: [
+        {
+          kind: "keypoint",
+          eyebrow: "Il filo conduttore dell'unità",
+          text:
+            "Misurare → Stimare → Certificare. Tre passi della stessa disciplina.",
+        },
         {
           kind: "ordered",
           items: [

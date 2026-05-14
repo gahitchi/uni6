@@ -12,6 +12,10 @@ import { McCallTree } from "./McCallTree";
 import { FactorMatrix } from "./FactorMatrix";
 import { ISO9126Tree } from "./ISO9126Tree";
 import { QualityInUse } from "./QualityInUse";
+import { LOCvsFPCompare } from "./LOCvsFPCompare";
+import { COCOMOEffortCurve } from "./COCOMOEffortCurve";
+import { EstimationDecisionTree } from "./EstimationDecisionTree";
+import { ErrorPhaseTimeline } from "./ErrorPhaseTimeline";
 
 const registry: Record<string, () => React.ReactElement> = {
   LOCDiagram,
@@ -28,6 +32,10 @@ const registry: Record<string, () => React.ReactElement> = {
   FactorMatrix,
   ISO9126Tree,
   QualityInUse,
+  LOCvsFPCompare,
+  COCOMOEffortCurve,
+  EstimationDecisionTree,
+  ErrorPhaseTimeline,
 };
 
 export function Diagram({ name }: { name: string }) {

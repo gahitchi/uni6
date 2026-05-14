@@ -27,6 +27,11 @@ export function SlideView({ slide, lesson }: { slide: Slide; lesson: Lesson }) {
   const visibleBlocks = slide.blocks.filter((b) => b.kind !== "paragraph");
   const isOpener = slide.kind === "opener";
   const isCloser = slide.kind === "closer";
+  const isTransition = slide.kind === "transition";
+  const isAnchor = slide.kind === "anchor";
+  const isKeypoint = slide.kind === "keypoint";
+  /** Slide kinds that get a minimalist, centered presentation. */
+  const isMinimal = isTransition || isKeypoint;
 
   // Speaker notes: explicit notes[] take precedence; otherwise we surface any
   // paragraph blocks as fallback talking points.
@@ -47,6 +52,7 @@ export function SlideView({ slide, lesson }: { slide: Slide; lesson: Lesson }) {
         "animate-fade-in",
         isOpener && "border-t-[3px] border-t-accent-600",
         isCloser && "border-b-[3px] border-b-accent-600",
+        isMinimal && "flex items-center justify-center",
       )}
     >
       {/* Single accent glow — calmer than dual radial */}
@@ -55,36 +61,51 @@ export function SlideView({ slide, lesson }: { slide: Slide; lesson: Lesson }) {
         aria-hidden
       />
 
-      <header
-        className={cn(
-          "relative mb-9 md:mb-12",
-          isCloser && "text-center",
-        )}
-      >
-        <div className={cn("flex flex-col", isCloser && "items-center")}>
-          <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-accent-700">
-            Lezione {lesson.number} · {slide.eyebrow ?? lesson.title}
-          </p>
-          <span className="eyebrow-rule" aria-hidden />
-        </div>
-        <h1
+      <div className={cn("relative w-full", isMinimal && "max-w-3xl text-center")}>
+        <header
           className={cn(
-            "mt-5 font-semibold text-ink-900",
-            isOpener
-              ? "text-[44px] md:text-[64px] lg:text-[80px] leading-[1.0] tracking-[-0.035em]"
-              : isCloser
-                ? "text-[40px] md:text-[56px] lg:text-[72px] leading-[1.0] tracking-[-0.03em]"
-                : "text-[30px] md:text-[40px] lg:text-[48px] leading-[1.05] tracking-[-0.028em]",
+            "relative mb-9 md:mb-12",
+            (isCloser || isMinimal) && "text-center",
           )}
         >
-          {slide.title}
-        </h1>
-      </header>
+          <div
+            className={cn(
+              "flex flex-col",
+              (isCloser || isMinimal) && "items-center",
+            )}
+          >
+            <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-accent-700">
+              Lezione {lesson.number} · {slide.eyebrow ?? lesson.title}
+            </p>
+            <span className="eyebrow-rule" aria-hidden />
+          </div>
+          <h1
+            className={cn(
+              "mt-5 font-semibold text-ink-900",
+              isOpener
+                ? "text-[44px] md:text-[64px] lg:text-[80px] leading-[1.0] tracking-[-0.035em]"
+                : isCloser
+                  ? "text-[40px] md:text-[56px] lg:text-[72px] leading-[1.0] tracking-[-0.03em]"
+                  : isTransition
+                    ? "text-[36px] md:text-[52px] lg:text-[64px] leading-[1.02] tracking-[-0.03em]"
+                    : "text-[30px] md:text-[40px] lg:text-[48px] leading-[1.05] tracking-[-0.028em]",
+            )}
+          >
+            {slide.title}
+          </h1>
+        </header>
 
-      <div className="relative space-y-5 md:space-y-6 animate-slide-up">
-        {visibleBlocks.map((b, i) => (
-          <BlockRenderer key={i} block={b} />
-        ))}
+        <div
+          className={cn(
+            "stagger relative space-y-5 md:space-y-6",
+            isAnchor && "flex flex-col items-center",
+          )}
+          key={slide.id}
+        >
+          {visibleBlocks.map((b, i) => (
+            <BlockRenderer key={`${slide.id}-${i}`} block={b} />
+          ))}
+        </div>
       </div>
 
       {/* Notes panel — opens from the bottom */}

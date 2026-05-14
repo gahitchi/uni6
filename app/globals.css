@@ -66,6 +66,37 @@ body {
   margin-top: 6px;
 }
 
+/* Staggered reveal — each block fades up with a small cumulative delay.
+   Guides the audience's eye from top to bottom and prevents visual overload. */
+@keyframes blockReveal {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.stagger > * {
+  animation: blockReveal 520ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.stagger > *:nth-child(1) { animation-delay: 60ms; }
+.stagger > *:nth-child(2) { animation-delay: 160ms; }
+.stagger > *:nth-child(3) { animation-delay: 240ms; }
+.stagger > *:nth-child(4) { animation-delay: 320ms; }
+.stagger > *:nth-child(5) { animation-delay: 400ms; }
+.stagger > *:nth-child(6) { animation-delay: 470ms; }
+.stagger > *:nth-child(7) { animation-delay: 540ms; }
+.stagger > *:nth-child(8) { animation-delay: 600ms; }
+.stagger > *:nth-child(n+9) { animation-delay: 660ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .stagger > * { animation: none; }
+}
+
+/* Subtle data-grid backdrop — used inside "stat" and "keypoint" blocks. */
+.bg-data-grid {
+  background-image:
+    linear-gradient(rgba(53,108,255,0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(53,108,255,0.07) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
 /* subtle grid background — kept for the homepage hero */
 .bg-grid {
   background-image:

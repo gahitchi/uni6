@@ -132,9 +132,9 @@ export const lesson1: Lesson = {
       title: "LOC — la prima metrica dimensionale",
       blocks: [
         {
-          kind: "paragraph",
+          kind: "lead",
           text:
-            "Le sigle LOC (Lines Of Code) o SLOC (Source Lines Of Code) e il loro multiplo KLOC (1000 LOC) indicano la prima e più semplice metrica dimensionale: il conteggio di tutte le linee fisiche del codice sorgente.",
+            "La metrica più semplice: contare le linee fisiche del codice sorgente. Quattro varianti diverse, stesso programma — risultati molto diversi.",
         },
         {
           kind: "diagram",
@@ -145,36 +145,21 @@ export const lesson1: Lesson = {
         {
           kind: "callout",
           tone: "warning",
-          title: "Limiti del conteggio fisico",
+          title: "Il problema fondamentale",
           text:
-            "Il risultato dipende fortemente dallo stile di programmazione: molti linguaggi permettono più istruzioni sulla stessa riga, e LOC non distingue tipologia di istruzione né linguaggio.",
+            "Il risultato dipende dallo stile e dal linguaggio: stesse funzionalità, conteggi diversi. Codice più lungo ≠ codice migliore.",
         },
         {
-          kind: "paragraph",
+          kind: "takeaway",
           text:
-            "Sono state introdotte varianti per migliorarne la rappresentatività:",
+            "Oggi il LOC è dedotto a posteriori dai Function Points via backfiring — non più stimato direttamente.",
         },
-        {
-          kind: "list",
-          variant: "bullet",
-          items: [
-            "NCLOC (Non Comment Lines Of Code) — esclude i commenti",
-            "NCNB (Non Comment Non Blank) — esclude commenti e righe vuote",
-            "CLOC (Comment Lines Of Code) — solo i commenti",
-            "EXEC — solo le linee di codice eseguibile",
-          ],
-        },
-        {
-          kind: "callout",
-          tone: "info",
-          text:
-            "Con questa metrica non è possibile stabilire parametri che tengano conto della difficoltà del software realizzato. Spesso il codice più lungo non è il più performante — anzi è quasi sempre vero il contrario.",
-        },
-        {
-          kind: "paragraph",
-          text:
-            "Per tener conto del linguaggio si introducono coefficienti moltiplicativi; oggi la stima viene di solito dedotta dalla mole di lavoro stimata con i Function Points, ottenendo anche una valutazione preventiva.",
-        },
+      ],
+      notes: [
+        "Le sigle: LOC = Lines Of Code, SLOC = Source LOC, KLOC = 1000 LOC.",
+        "Le quattro varianti: NCLOC (no comment), NCNB (no comment, no blank), CLOC (solo comment), EXEC (solo eseguibili).",
+        "Con LOC non si tiene conto della difficoltà del software realizzato.",
+        "Si introducono coefficienti moltiplicativi per linguaggio, ma la stima preventiva è inaffidabile.",
       ],
     },
     {
@@ -183,20 +168,39 @@ export const lesson1: Lesson = {
       title: "Function Points — la misura funzionale",
       blocks: [
         {
-          kind: "paragraph",
-          text:
-            "Nell'ottobre 1979 Allan Albrecht introduce una nuova metrica per rendere più adeguate le stime dei progetti software sviluppati con nuovi linguaggi e tecniche di programmazione (visuali, a oggetti, ecc.), dove LOC non riusciva a valutare l'incidenza dei costi fissi non associati alla codifica.",
+          kind: "diagram",
+          name: "LOCvsFPCompare",
         },
         {
           kind: "definition",
           term: "Function Points (FP)",
           text:
-            "Tipo di misura funzionale basato sull'idea di quantificare un'applicazione dal punto di vista dell'utente: misurano indirettamente le funzionalità che il software deve fornire, senza tener conto degli aspetti tecnici e implementativi.",
+            "Misura funzionale che quantifica l'applicazione dal punto di vista dell'utente: misura le funzionalità da fornire, indipendentemente da tecnologia e implementazione.",
         },
         {
-          kind: "paragraph",
-          text:
-            "Vantaggi: forniscono una misura oggettiva e comparativa che assiste nella valutazione, progettazione, amministrazione e controllo della produzione. Svantaggio: non tengono conto della difficoltà reale dell'algoritmo, ma solo del numero di operazioni I/O del programma.",
+          kind: "compare",
+          a: {
+            label: "Pro",
+            sub: "perché si usano",
+            points: [
+              "Misura oggettiva e comparativa",
+              "Indipendente dal linguaggio",
+              "Usabile in fase preventiva",
+              "Standard ISO riconosciuto",
+            ],
+          },
+          b: {
+            label: "Contro",
+            sub: "i limiti reali",
+            points: [
+              "Non misura la difficoltà algoritmica",
+              "Solo I/O, non logica interna",
+              "Soggettività nei pesi",
+              "Adatti soprattutto a MIS",
+            ],
+          },
+          verdict:
+            "FP misurano ciò che l'utente vede; LOC misurano ciò che lo sviluppatore scrive.",
         },
         {
           kind: "paragraph",
@@ -267,20 +271,27 @@ export const lesson1: Lesson = {
       title: "Il processo IFPUG in sette fasi",
       blocks: [
         {
-          kind: "paragraph",
+          kind: "lead",
           text:
-            "Il metodo IFPUG è descritto nel Function Points Counting Practices Manual (versione corrente 4.3.1). In Italia il GUFPI (Gruppo Utenti Function Points Italia) ha tradotto tutte le versioni del Manuale di Conteggio.",
+            "Function Points Counting Practices Manual 4.3.1 — sette fasi rigorose, precedute dalla determinazione dei vincoli (Boundary Diagram).",
         },
         {
-          kind: "paragraph",
-          text:
-            "Il calcolo degli FP è composto da sette fasi, precedute da una fase determinante per il buon esito della valutazione — la determinazione dei vincoli — analizzata insieme a un esperto di FP. Il risultato è il diagramma dei vincoli (Boundary Diagram).",
+          kind: "journey",
+          steps: [
+            { label: "Pianificazione del conteggio", description: "Inserire il calcolo FP nel piano di progetto." },
+            { label: "Raccolta della documentazione", description: "Requisiti, interfacce, modelli dati." },
+            { label: "Inventario e UFP non pesati", description: "Identificare ILF, EIF, EI, EO, EQ." },
+            { label: "Classificazione dei componenti", description: "Distinguere processi elementari." },
+            { label: "GSC e VAF", description: "14 caratteristiche, fattore di aggiustamento ±35 %." },
+            { label: "Tabulazione e calcolo finale", description: "Foglio di riepilogo con pesi e VAF." },
+            { label: "Validazione e revisione", description: "Verifica di completezza con esperto FP." },
+          ],
         },
-        {
-          kind: "diagram",
-          name: "IFPUGFlow",
-          caption: "Le sette fasi del processo IFPUG di Function Point Analysis.",
-        },
+      ],
+      notes: [
+        "Il manuale è il Function Points Counting Practices Manual versione 4.3.1.",
+        "In Italia il GUFPI ha tradotto tutte le versioni del Manuale di Conteggio.",
+        "La fase 0 — determinazione dei vincoli — produce il diagramma dei vincoli (Boundary Diagram).",
       ],
     },
     {
@@ -565,9 +576,9 @@ export const lesson1: Lesson = {
       title: "DET, RET, FTR — i tre indicatori elementari",
       blocks: [
         {
-          kind: "paragraph",
+          kind: "lead",
           text:
-            "Poiché alcune funzionalità sono più complesse di altre, IFPUG prevede che le occorrenze siano 'pesate' usando tabelle di riferimento: si deduce un giudizio (basso, medio, alto) e poi un punteggio da assegnare a ogni funzione, variabile tra 3 e 15.",
+            "Non tutte le funzioni sono uguali. IFPUG le pesa con tre indicatori che traducono in punteggio numerico (3 → 15) la complessità reale.",
         },
         {
           kind: "list",
@@ -867,6 +878,25 @@ export const lesson1: Lesson = {
           text:
             "Esistono metriche alternative: Early Function Points, ILF Models, Feature Points (SPR).",
         },
+      ],
+    },
+    {
+      id: "transizione",
+      eyebrow: "Verso la Lezione 2",
+      title: "Sappiamo quanto codice. Ora: quanto costerà?",
+      kind: "transition",
+      blocks: [
+        {
+          kind: "keypoint",
+          eyebrow: "Ponte concettuale",
+          text:
+            "Dalle metriche di prodotto ai modelli di stima dei costi: dal cosa al quanto.",
+        },
+      ],
+      notes: [
+        "Riassumi rapidamente la lezione 1: LOC, FP, IFPUG, backfiring.",
+        "Annuncia la lezione 2: COCOMO, SLIM, COBRA, Delphi.",
+        "Domanda retorica: 'Se misuriamo la mole di software, possiamo prevederne i costi?'",
       ],
     },
   ],
