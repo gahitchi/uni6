@@ -11,8 +11,9 @@ export function COCOMOEffortCurve() {
   const w = 760;
   const h = 360;
   const padX = 60;
+  const padR = 150; // extra right margin so the end-of-curve labels aren't clipped
   const padY = 40;
-  const innerW = w - padX * 2;
+  const innerW = w - padX - padR;
   const innerH = h - padY * 2;
 
   const maxKLOC = 120;
@@ -46,14 +47,14 @@ export function COCOMOEffortCurve() {
             key={i}
             x1={padX}
             y1={padY + innerH * t}
-            x2={w - padX}
+            x2={padX + innerW}
             y2={padY + innerH * t}
             stroke="#eceef2"
           />
         ))}
         {/* axes */}
         <line x1={padX} y1={padY} x2={padX} y2={h - padY} stroke="#aeb5c6" strokeWidth="1.5" />
-        <line x1={padX} y1={h - padY} x2={w - padX} y2={h - padY} stroke="#aeb5c6" strokeWidth="1.5" />
+        <line x1={padX} y1={h - padY} x2={padX + innerW} y2={h - padY} stroke="#aeb5c6" strokeWidth="1.5" />
 
         {/* x labels */}
         {[20, 40, 60, 80, 100, 120].map((tick) => {
@@ -67,7 +68,7 @@ export function COCOMOEffortCurve() {
             </g>
           );
         })}
-        <text x={w - padX} y={h - padY + 35} textAnchor="end" fontSize="11" fill="#5b6781" fontWeight="600">
+        <text x={padX + innerW} y={h - padY + 35} textAnchor="end" fontSize="11" fill="#5b6781" fontWeight="600">
           dimensione (KLOC)
         </text>
         <text x={padX - 10} y={padY + 5} textAnchor="end" fontSize="11" fill="#5b6781" fontWeight="600">

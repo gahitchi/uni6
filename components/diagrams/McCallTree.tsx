@@ -1,36 +1,57 @@
 export function McCallTree() {
+  // Linear left-to-right flow (matches the caption: Fattori → Criteri → Metriche).
+  // Replaces the old L-shaped layout whose connector had a visible gap.
+  const W = 210;
+  const Y = 58;
+  const H = 64;
+  const boxes = [
+    { x: 20, fill: "url(#mc1)", t1: "Fattori (11)", t2: "vista utente", sub: "#bcd4ff" },
+    { x: 275, fill: "#356cff", t1: "Criteri (23)", t2: "vista sviluppatore", sub: "#bcd4ff" },
+    { x: 530, fill: "#5a92ff", t1: "Metriche (290+)", t2: "misure quantitative", sub: "#dbeafe" },
+  ];
+  const links = [
+    { x1: 230, x2: 273, label: "è dipendente da", lx: 251 },
+    { x1: 485, x2: 528, label: "si misura tramite", lx: 506 },
+  ];
   return (
     <div className="rounded-2xl border border-ink-200 bg-white p-5 md:p-7 shadow-card">
-      <svg viewBox="0 0 720 280" className="w-full h-auto" role="img" aria-label="Architettura McCall-Boehm">
+      <svg viewBox="0 0 760 165" className="w-full h-auto" role="img" aria-label="Architettura McCall-Boehm a tre livelli">
         <defs>
           <linearGradient id="mc1" x1="0" x2="1" y1="0" y2="1">
             <stop offset="0%" stopColor="#1d4eef" />
             <stop offset="100%" stopColor="#163cd6" />
           </linearGradient>
+          <marker id="mcArrow" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto">
+            <path d="M0 0 L6 3 L0 6 Z" fill="#aeb5c6" />
+          </marker>
         </defs>
-        {/* connecting lines */}
-        <line x1="120" y1="80" x2="360" y2="80" stroke="#d4d8e2" strokeWidth="2" />
-        <line x1="360" y1="80" x2="360" y2="140" stroke="#d4d8e2" strokeWidth="2" />
-        <line x1="360" y1="200" x2="600" y2="200" stroke="#d4d8e2" strokeWidth="2" />
-
-        {/* level 1 - Fattori */}
-        <rect x="20" y="55" width="200" height="50" rx="10" fill="url(#mc1)" />
-        <text x="120" y="78" textAnchor="middle" fontWeight="700" fontSize="13" fill="#fff">Fattori (11)</text>
-        <text x="120" y="96" textAnchor="middle" fontSize="11" fill="#bcd4ff">vista utente</text>
-
-        {/* level 2 - Criteri */}
-        <rect x="260" y="55" width="200" height="50" rx="10" fill="#356cff" />
-        <text x="360" y="78" textAnchor="middle" fontWeight="700" fontSize="13" fill="#fff">Criteri (23)</text>
-        <text x="360" y="96" textAnchor="middle" fontSize="11" fill="#bcd4ff">vista sviluppatore</text>
-
-        {/* level 3 - Metriche */}
-        <rect x="500" y="170" width="200" height="50" rx="10" fill="#5a92ff" />
-        <text x="600" y="193" textAnchor="middle" fontWeight="700" fontSize="13" fill="#fff">Metriche (290+)</text>
-        <text x="600" y="211" textAnchor="middle" fontSize="11" fill="#dbeafe">misure quantitative</text>
-
-        {/* arrows */}
-        <text x="240" y="40" fontSize="11" fill="#5b6781">è dipendente da</text>
-        <text x="240" y="138" fontSize="11" fill="#5b6781">si misura tramite</text>
+        {links.map((c, i) => (
+          <g key={i}>
+            <line
+              x1={c.x1}
+              y1={Y + H / 2}
+              x2={c.x2}
+              y2={Y + H / 2}
+              stroke="#aeb5c6"
+              strokeWidth="2"
+              markerEnd="url(#mcArrow)"
+            />
+            <text x={c.lx} y={Y - 14} textAnchor="middle" fontSize="10.5" fill="#5b6781">
+              {c.label}
+            </text>
+          </g>
+        ))}
+        {boxes.map((b) => (
+          <g key={b.t1}>
+            <rect x={b.x} y={Y} width={W} height={H} rx="12" fill={b.fill} />
+            <text x={b.x + W / 2} y={Y + 27} textAnchor="middle" fontWeight="700" fontSize="13" fill="#fff">
+              {b.t1}
+            </text>
+            <text x={b.x + W / 2} y={Y + 47} textAnchor="middle" fontSize="11" fill={b.sub}>
+              {b.t2}
+            </text>
+          </g>
+        ))}
       </svg>
     </div>
   );

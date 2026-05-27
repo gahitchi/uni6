@@ -182,11 +182,6 @@ export const lesson2: Lesson = {
           name: "EstimationDecisionTree",
           caption: "Albero decisionale dei metodi di stima dei costi.",
         },
-        {
-          kind: "diagram",
-          name: "BoehmTaxonomy",
-          caption: "Tassonomia originale di Boehm (vista categoriale).",
-        },
       ],
       notes: [
         "L'albero decisionale è una semplificazione operativa — il libro presenta la tassonomia Boehm originale.",

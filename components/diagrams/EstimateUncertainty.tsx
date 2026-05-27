@@ -44,11 +44,14 @@ export function EstimateUncertainty() {
         {/* axes */}
         <line x1={padX} y1={padY} x2={padX} y2={h - padY} stroke="#aeb5c6" />
         <line x1={padX} y1={baseY} x2={w - padX} y2={baseY} stroke="#aeb5c6" strokeDasharray="3 3" />
+        <text x={w - padX} y={baseY - 8} textAnchor="end" fontSize="11" fill="#5b6781">
+          stima reale
+        </text>
         {/* y labels */}
         {[
           { y: padY + 10, label: "×4" },
           { y: baseY - 60, label: "×2" },
-          { y: baseY, label: "×1 stima reale" },
+          { y: baseY, label: "×1" },
           { y: baseY + 60, label: "½" },
           { y: h - padY - 10, label: "¼" },
         ].map((t, i) => (

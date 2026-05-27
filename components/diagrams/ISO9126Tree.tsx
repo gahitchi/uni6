@@ -3,7 +3,7 @@ const characteristics = [
   { name: "Affidabilità", subs: ["Maturità", "Tolleranza ai guasti", "Recuperabilità", "Aderenza"] },
   { name: "Usabilità", subs: ["Comprensibilità", "Apprendibilità", "Operabilità", "Attrattività", "Aderenza"] },
   { name: "Efficienza", subs: ["Comportamento rispetto al tempo", "Utilizzo delle risorse", "Aderenza"] },
-  { name: "Manutenibilità", subs: ["Analizzabilità", "Modificabilità", "Testabilità", "Aderenza"] },
+  { name: "Manutenibilità", subs: ["Analizzabilità", "Modificabilità", "Stabilità", "Testabilità", "Aderenza"] },
   { name: "Portabilità", subs: ["Adattabilità", "Installabilità", "Coesistenza", "Sostituibilità", "Aderenza"] },
 ];
 

@@ -50,7 +50,7 @@ export function RayleighNorden() {
         })()}
         {/* labels */}
         <text x={padX - 8} y={padY - 6} textAnchor="end" fontSize="11" fill="#5b6781">dM/dt</text>
-        <text x={w - padX} y={h - padY + 16} textAnchor="end" fontSize="11" fill="#5b6781">t</text>
+        <text x={w - padX + 14} y={h - padY + 5} textAnchor="start" fontSize="11" fill="#5b6781">t</text>
         {[5, 10, 15, 20, 25, 30, 35].map((tick) => {
           const x = padX + (tick / 35) * innerW;
           return (
