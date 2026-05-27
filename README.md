@@ -1,8 +1,9 @@
 # Unità 6 — Metriche per la stima dei costi nei progetti informatici
 
 Presentation-style deck (full-screen slide canvas, edge navigation, speaker
-notes) built from the source PDF (53 pages, italiano). Three lezioni, ~50
-slide, 14 diagrammi SVG inline. Durata stimata: ≈ 45 minuti.
+notes) built from the source PDF (53 pages, italiano). Tre lezioni, ~50
+slide, 17 diagrammi SVG inline. Durata stimata: ≈ 60 minuti, dimensionata per
+6 relatori (2 per lezione, ~10 minuti a testa).
 
 ## Stack
 

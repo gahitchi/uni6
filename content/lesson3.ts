@@ -141,44 +141,11 @@ export const lesson3: Lesson = {
             "Le tre macrofasi: Product Operations, Product Revision, Product Transition.",
         },
         {
-          kind: "twoColumn",
-          left: {
-            title: "Product Operations (usabilità)",
-            items: [
-              "Correttezza",
-              "Affidabilità",
-              "Efficienza",
-              "Integrità",
-              "Soddisfazione",
-            ],
-          },
-          right: {
-            title: "Product Revision (manutenibilità)",
-            items: [
-              "Manutenibilità",
-              "Flessibilità",
-              "Testabilità",
-            ],
-          },
-        },
-        {
-          kind: "twoColumn",
-          left: {
-            title: "Product Transition (portabilità)",
-            items: [
-              "Portabilità",
-              "Riusabilità",
-              "Interoperabilità",
-            ],
-          },
-          right: {
-            title: "Definizioni Boehm",
-            items: [
-              "Usabilità — grado con cui è conveniente e praticabile l'uso del sistema (sforzo per imparare a usarlo)",
-              "Manutenibilità — possesso della caratteristica di soddisfare nuovi requisiti facilmente",
-              "Portabilità — uso semplicemente su altre installazioni oltre a quella di uso",
-            ],
-          },
+          kind: "callout",
+          tone: "info",
+          title: "L'idea di Boehm",
+          text:
+            "Rispetto a McCall, Boehm dispone gli attributi in una gerarchia top-down: in alto la vista del committente (utilità d'uso), in basso quella del produttore, scendendo dagli attributi generali ai sottoattributi semplici fino alle metriche misurabili.",
         },
       ],
     },
@@ -613,7 +580,7 @@ export const lesson3: Lesson = {
           kind: "definition",
           term: "Process capability",
           text:
-            "La capacità di un processo di raggiungere l'obiettivo prefissato (ISO/IEC 155904-9).",
+            "La capacità di un processo di raggiungere l'obiettivo prefissato (ISO/IEC 15504-9).",
         },
         {
           kind: "paragraph",

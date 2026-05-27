@@ -39,7 +39,7 @@ export function HomeChrome({ totalSlides }: { totalSlides: number }) {
           <div className="flex-1" />
 
           <span className="hidden md:inline text-[12px] text-ink-500">
-            {totalSlides} slide · ≈ 45 minuti
+            {totalSlides} slide · ≈ 60 minuti
           </span>
 
           <button

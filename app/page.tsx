@@ -108,7 +108,7 @@ export default function HomePage() {
                 <dl className="mt-4 divide-y divide-ink-100/70">
                   <Row k="Lezioni" v={String(unit.lessons.length)} />
                   <Row k="Slide" v={String(totalSlides)} />
-                  <Row k="Durata" v="≈ 45 minuti" />
+                  <Row k="Durata" v="≈ 60 minuti" />
                   <Row k="Lingua" v="Italiano" />
                 </dl>
                 <p className="mt-5 text-[12px] leading-relaxed text-ink-500">

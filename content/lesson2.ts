@@ -156,16 +156,9 @@ export const lesson2: Lesson = {
         {
           kind: "callout",
           tone: "warning",
-          title: "Limiti della dimensione interna",
+          title: "Ogni misura ha i suoi limiti",
           text:
-            "Non esiste una definizione standard di come contare le linee. Linguaggio e stile incidono pesantemente sul numero di LOC. Non si tiene conto della 'diversa potenza' delle istruzioni. Il valore in LOC è difficile da stimare nelle fasi iniziali.",
-        },
-        {
-          kind: "callout",
-          tone: "warning",
-          title: "Limiti della dimensione esterna",
-          text:
-            "Definizione di 'funzionalità' soggettiva. La determinazione degli FP varia molto da chi la fa. Lo schema dei pesi non è del tutto trasparente. Gli FP rendono al meglio nei MIS, meno in altri sistemi.",
+            "Come visto nella Lezione 1: il LOC non ha una definizione univoca e dipende da linguaggio e stile; gli FP soffrono di soggettività nel conteggio e rendono al meglio nei MIS. La scelta dipende dalla fase del progetto e dai dati storici disponibili.",
         },
         {
           kind: "takeaway",
@@ -607,26 +600,44 @@ export const lesson2: Lesson = {
       title: "Alberi di classificazione e Optimized Set Reduction",
       blocks: [
         {
-          kind: "paragraph",
-          text:
-            "Gli alberi di classificazione sono la tecnica più usata di machine learning. La versione originaria si applica solo a dati discreti: la variabile costo va categorizzata.",
-        },
-        {
-          kind: "paragraph",
-          text:
-            "Si parte dalla radice associata a tutti i dati. Si determina il fattore di costo i cui valori predicono meglio le categorie di costo. Ciascun sotto-insieme diventa un nodo figlio della radice, con una distribuzione propria.",
+          kind: "journey",
+          intro:
+            "Gli alberi di classificazione sono la tecnica di machine learning più usata: la variabile di costo viene categorizzata e predetta a partire dai fattori di costo.",
+          steps: [
+            { label: "Radice", description: "Si parte da un unico nodo associato a tutti i dati." },
+            { label: "Split migliore", description: "Si sceglie il fattore di costo i cui valori predicono meglio le categorie di costo." },
+            { label: "Nodi figli", description: "Ogni sotto-insieme diventa un nodo figlio, con la propria distribuzione." },
+            { label: "Ricorsione", description: "Si ripete finché la distribuzione è polarizzata o le osservazioni scendono sotto una soglia." },
+          ],
         },
         {
           kind: "callout",
           tone: "info",
           text:
-            "Obiettivo: rendere ciascuna distribuzione meno omogenea, ovvero far sì che in ciascuna ci sia un valore dominante della variabile di costo.",
+            "Obiettivo di ogni split: rendere la distribuzione più omogenea, cioè far emergere in ciascun nodo un valore dominante della variabile di costo.",
         },
         {
-          kind: "paragraph",
-          text:
-            "Il procedimento ricorsivo si interrompe quando il nodo ha distribuzione completamente polarizzata, o il numero di osservazioni scende sotto un limite. CART (Classification And Regression Tree) discretizza i fattori continui. OSR (Optimized Set Reduction) costruisce una gerarchia di nodi non necessariamente albero.",
+          kind: "twoColumn",
+          left: {
+            title: "CART",
+            items: [
+              "Classification And Regression Tree",
+              "Discretizza i fattori continui per usarli nell'albero",
+            ],
+          },
+          right: {
+            title: "OSR",
+            items: [
+              "Optimized Set Reduction",
+              "Costruisce una gerarchia di nodi, non necessariamente un albero",
+            ],
+          },
         },
+      ],
+      notes: [
+        "La versione originaria degli alberi di classificazione lavora solo su dati discreti: la variabile costo va prima categorizzata.",
+        "Lo split ricorsivo si ferma quando il nodo è completamente polarizzato o ha troppe poche osservazioni.",
+        "CART estende il metodo ai fattori continui discretizzandoli; OSR rilassa il vincolo ad albero costruendo una gerarchia di nodi.",
       ],
     },
     {

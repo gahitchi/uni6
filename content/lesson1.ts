@@ -305,6 +305,15 @@ export const lesson1: Lesson = {
             "Il calcolo degli FP deve essere incluso nella pianificazione del progetto in modo che diventi una prassi standard e rientri nella pianificazione delle attività: può iniziare prima della fine dello studio di fattibilità ma deve essere documentato e aggiornato, dato che il mutamento dei requisiti può modificare gli FP stessi.",
         },
         {
+          kind: "list",
+          variant: "arrow",
+          items: [
+            "Il conteggio FP entra nel piano di progetto come prassi standard",
+            "Può partire già prima della fine dello studio di fattibilità",
+            "Va documentato e aggiornato: ogni variazione dei requisiti cambia gli FP",
+          ],
+        },
+        {
           kind: "takeaway",
           text:
             "Al termine della raccolta dei requisiti è necessaria una verifica: i nuovi FP introdotti o modificati devono essere etichettati per risultare ben evidenti.",
@@ -622,11 +631,11 @@ export const lesson1: Lesson = {
         {
           kind: "table",
           caption: "Complessità ILF / EIF in base a RET e DET",
-          headers: ["FTR \\ DET", "1–19", "20–50", "51+"],
+          headers: ["RET \\ DET", "1–19", "20–50", "51+"],
           rows: [
-            ["1", "Bassa", "Media", "Alta"],
+            ["1", "Bassa", "Bassa", "Media"],
             ["2–5", "Bassa", "Media", "Alta"],
-            ["6+", "Bassa", "Media", "Alta"],
+            ["6+", "Media", "Alta", "Alta"],
           ],
         },
         {

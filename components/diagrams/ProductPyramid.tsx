@@ -24,7 +24,7 @@ export function ProductPyramid() {
         {/* Bottom left - Product Operations */}
         <circle cx="60" cy="320" r="14" fill="url(#t1)" />
         <text x="60" y="345" textAnchor="start" fontWeight="700" fontSize="14" fill="#1c2030">Product Operations</text>
-        <text x="60" y="305" textAnchor="start" fontSize="11" fill="#1c2030">Correttezza · Affidabilità · Efficienza · Integrità · Soddisfazione</text>
+        <text x="60" y="305" textAnchor="start" fontSize="11" fill="#1c2030">Correttezza · Affidabilità · Efficienza · Integrità · Usabilità</text>
 
         {/* Center */}
         <text x="300" y="200" textAnchor="middle" fontWeight="800" fontSize="16" fill="#1c2030">11 FATTORI</text>
